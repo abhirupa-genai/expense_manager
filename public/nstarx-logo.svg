@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Nstarx logo">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0ea5e9" />
+      <stop offset="1" stop-color="#2563eb" />
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="28" fill="url(#g)" />
+  <!-- 5-point star -->
+  <polygon
+    points="32,6 39.8,23.2 58.3,24.8 44.1,36.2 48.4,54.1 32,45.2 15.6,54.1 19.9,36.2 5.7,24.8 24.2,23.2"
+    fill="#ffffff"
+  />
+  <!-- "N" mark -->
+  <path
+    d="M19.5 46.5V17.5h6.3l18.7 23.1V17.5h6.1v29h-6.1L25.6 23.2v23.3h-6.1Z"
+    fill="#0b1220"
+    opacity="0.9"
+  />
+</svg>
