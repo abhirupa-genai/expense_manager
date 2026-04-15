@@ -1,0 +1,114 @@
+{
+  "reports": [
+    {
+      "id": "10df6dde-c2a2-4170-8544-22e5f01f9eb8",
+      "name": "India Team Building",
+      "employeeName": "Abhirupa Sen",
+      "employeeEmail": "abhirupa.sen@nstarxinc.com",
+      "managerName": "Shayne Pinto",
+      "managerEmail": "shayne.pinto@nstarxinc.com",
+      "submittedAt": "2026-04-10T22:02:14.830Z",
+      "status": "pending",
+      "expenses": [
+        {
+          "vendor": "Uber",
+          "date": "2026-01-30",
+          "city": "Mumbai",
+          "currency": "INR",
+          "amount": 541.47,
+          "is_receipt": true,
+          "filename": "Uber_Air_Mum.pdf",
+          "mimeType": "application/pdf",
+          "signature": "uber|2026-01-30|541.47",
+          "contentHash": "3d1bd2842728c1a06754bb80de76bbec88af949c0e925aaee92ad4c9c9dcad8f",
+          "convertedAmount": 541.47,
+          "convertedCurrency": "INR"
+        }
+      ],
+      "totalAmount": 541.47,
+      "currency": "INR"
+    },
+    {
+      "id": "effc287d-bee6-448d-81d3-d4e8d0ccfed2",
+      "name": "Test Expenses",
+      "employeeName": "Abhirupa Sen",
+      "managerName": "Shayne Pinto",
+      "managerEmail": "shayne.pinto@nstarxinc.com",
+      "submittedAt": "2026-04-10T21:47:17.840Z",
+      "status": "rejected",
+      "expenses": [
+        {
+          "vendor": "Residential Cleaning Service",
+          "date": "2026-02-07",
+          "city": "Verdun",
+          "currency": "CAD",
+          "amount": 180.52,
+          "is_receipt": true,
+          "filename": "Invoice.png",
+          "mimeType": "image/png",
+          "signature": "residential cleaning service|2026-02-07|180.52",
+          "contentHash": "94f0d587e0fa2eaff47ab4a21cc9221c197a4bf67a88feaf806adba6c710037d",
+          "convertedAmount": 180.52,
+          "convertedCurrency": "CAD"
+        },
+        {
+          "vendor": "Frenchify with Vyom Inc.",
+          "date": "2026-03-15",
+          "city": "Montréal",
+          "currency": "CAD",
+          "amount": 11.99,
+          "is_receipt": true,
+          "filename": "REC12833.pdf",
+          "mimeType": "application/pdf",
+          "signature": "frenchify with vyom inc.|2026-03-15|11.99",
+          "contentHash": "8dd764ab8c4af59030d1728f7795777a40dca0bd0971a753b811a9e29b3f54a6",
+          "convertedAmount": 11.99,
+          "convertedCurrency": "CAD"
+        }
+      ],
+      "totalAmount": 192.51000000000002,
+      "currency": "CAD"
+    },
+    {
+      "id": "ed803b20-ba24-446c-af5e-3eeffab0bdcf",
+      "name": "Test Expenses",
+      "employeeName": "Abhirupa Sen",
+      "managerName": "Shayne Pinto",
+      "managerEmail": "shayne.pinto@nstarxinc.com",
+      "submittedAt": "2026-04-10T21:47:07.828Z",
+      "status": "pending",
+      "expenses": [
+        {
+          "vendor": "Residential Cleaning Service",
+          "date": "2026-02-07",
+          "city": "Verdun",
+          "currency": "CAD",
+          "amount": 180.52,
+          "is_receipt": true,
+          "filename": "Invoice.png",
+          "mimeType": "image/png",
+          "signature": "residential cleaning service|2026-02-07|180.52",
+          "contentHash": "94f0d587e0fa2eaff47ab4a21cc9221c197a4bf67a88feaf806adba6c710037d",
+          "convertedAmount": 180.52,
+          "convertedCurrency": "CAD"
+        },
+        {
+          "vendor": "Frenchify with Vyom Inc.",
+          "date": "2026-03-15",
+          "city": "Montréal",
+          "currency": "CAD",
+          "amount": 11.99,
+          "is_receipt": true,
+          "filename": "REC12833.pdf",
+          "mimeType": "application/pdf",
+          "signature": "frenchify with vyom inc.|2026-03-15|11.99",
+          "contentHash": "8dd764ab8c4af59030d1728f7795777a40dca0bd0971a753b811a9e29b3f54a6",
+          "convertedAmount": 11.99,
+          "convertedCurrency": "CAD"
+        }
+      ],
+      "totalAmount": 192.51000000000002,
+      "currency": "CAD"
+    }
+  ]
+}
