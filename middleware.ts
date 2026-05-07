@@ -1,26 +1,14 @@
-import { auth } from "@/auth";
-import { NextResponse } from "next/server";
-
-export default auth((req) => {
-  const isLoggedIn = !!req.auth;
-  const { pathname } = req.nextUrl;
-
-  const isAuthRoute = pathname.startsWith("/api/auth");
-  const isLoginPage = pathname === "/login";
-
-  if (isAuthRoute) return NextResponse.next();
-
-  if (!isLoggedIn && !isLoginPage) {
-    return NextResponse.redirect(new URL("/login", req.url));
-  }
-
-  if (isLoggedIn && isLoginPage) {
-    return NextResponse.redirect(new URL("/", req.url));
-  }
-
-  return NextResponse.next();
-});
+export { auth as proxy } from "@/auth";
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  matcher: [
+    /*
+     * Match all request paths except:
+     * - /login (the sign-in page itself)
+     * - /api/auth/* (Auth.js route handler)
+     * - /_next/static, /_next/image (Next.js internals)
+     * - /favicon.ico, /nstarx-logo.png (static assets)
+     */
+    "/((?!login|api/auth|_next/static|_next/image|favicon\\.ico|Logo\\.png).*)",
+  ],
 };
