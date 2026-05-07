@@ -10,6 +10,7 @@ export type EmployeeDirectoryRow = {
 
 export type EmployeeManagerRecord = {
   employeeName: string;
+  employeeEmail: string;
   managerName: string;
   managerEmail: string;
 };
@@ -23,7 +24,28 @@ const normalizeHeader = (value: unknown) =>
     .toLowerCase()
     .replace(/\s+/g, "_");
 
-const parseString = (value: unknown) => String(value ?? "").trim();
+const parseString = (value: unknown): string => {
+  if (value === null || value === undefined) return "";
+  // Handle hyperlink objects: { text: { richText: [...] }, hyperlink: "mailto:..." }
+  if (typeof value === "object") {
+    const obj = value as Record<string, unknown>;
+    if (typeof obj.hyperlink === "string") {
+      return obj.hyperlink.replace(/^mailto:/i, "").trim();
+    }
+    if (typeof obj.text === "string") return obj.text.trim();
+    if (obj.text && typeof obj.text === "object") {
+      const t = obj.text as Record<string, unknown>;
+      if (Array.isArray(t.richText)) {
+        return (t.richText as Array<{ text?: string }>)
+          .map((r) => r.text ?? "")
+          .join("")
+          .trim();
+      }
+    }
+    if (typeof obj.result === "string") return obj.result.trim();
+  }
+  return String(value).trim();
+};
 
 const getWorkbookPaths = () => [
   path.join(process.cwd(), "app", "api", "data", "employees.xlsx"),
@@ -122,6 +144,7 @@ export const findEmployeeRecord = async (
 
   return {
     employeeName: employeeRow.employeeName,
+    employeeEmail: employeeRow.employeeEmail.trim(),
     managerName: employeeRow.managerName,
     managerEmail,
   };

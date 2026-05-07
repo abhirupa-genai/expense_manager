@@ -1,5 +1,11 @@
 import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { randomUUID } from "crypto";
+
+export const runtime = "nodejs";
+
+const s3 = new S3Client({ region: process.env.AWS_REGION ?? "us-east-1" });
 
 // Ensure your .env.local has GEMINI_API_KEY
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
@@ -133,7 +139,27 @@ export async function POST(request: Request) {
       parsed.currency = normalizeDetectedCurrency(parsed);
     }
 
-    return NextResponse.json(parsed);
+    // Upload receipt to S3 if configured
+    let s3Key: string | undefined;
+    const bucket = process.env.AWS_S3_BUCKET;
+    if (bucket) {
+      const date = new Date().toISOString().slice(0, 10);
+      const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+      s3Key = `receipts/${date}/${randomUUID()}-${safeName}`;
+      try {
+        await s3.send(new PutObjectCommand({
+          Bucket: bucket,
+          Key: s3Key,
+          Body: Buffer.from(bytes),
+          ContentType: file.type,
+        }));
+      } catch (err) {
+        console.error("S3 upload failed:", err);
+        s3Key = undefined;
+      }
+    }
+
+    return NextResponse.json({ ...parsed, s3Key });
 
   } catch (error: unknown) {
     console.error("DETAILED SERVER ERROR:", error);

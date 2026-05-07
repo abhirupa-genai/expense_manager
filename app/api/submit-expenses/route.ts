@@ -130,8 +130,11 @@ export async function POST(request: Request) {
       },
     });
 
+    const reportName = String((body as { reportName?: string }).reportName ?? "").trim();
     const now = new Date().toISOString().slice(0, 10);
-    const subject = `Expense Submission - ${employeeName} - ${now}`;
+    const subject = reportName
+      ? `Expense Report Pending Approval: "${reportName}" — ${employeeName}`
+      : `Expense Report Pending Approval — ${employeeName} — ${now}`;
 
     await transporter.sendMail({
       from: fromEmail,
@@ -139,9 +142,15 @@ export async function POST(request: Request) {
       subject,
       text:
         `Hello ${managerName},\n\n` +
-        `${employeeName} has submitted ${expenses.length} expense item(s).\n` +
-        `Please find the attached Excel file for review.\n\n` +
-        `Regards,\nExpense Manager`,
+        `${employeeName} has submitted an expense report${reportName ? ` titled "${reportName}"` : ""} that requires your approval.\n\n` +
+        `Report details:\n` +
+        `  • Employee : ${employeeName}\n` +
+        `  • Report   : ${reportName || "—"}\n` +
+        `  • Items    : ${expenses.length} receipt(s)\n` +
+        `  • Date     : ${now}\n\n` +
+        `The full expense breakdown is attached as an Excel file.\n\n` +
+        `Please log in to the NStarX Expense Manager to approve or request clarification.\n\n` +
+        `Regards,\nNStarX Expense Manager`,
       attachments: [
         {
           filename: `expenses-${employeeName.replace(/\s+/g, "-").toLowerCase()}-${now}.xlsx`,
